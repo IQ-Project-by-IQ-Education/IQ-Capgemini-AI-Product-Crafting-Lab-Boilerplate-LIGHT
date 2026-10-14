@@ -1,5 +1,7 @@
 // The app's database: real SQLite (sql.js), kept inside the browser.
 // It is saved to IndexedDB after every write (localStorage if IndexedDB is blocked).
+// If the browser blocks both, it keeps working in memory only (DB.storage() === "memory"):
+// nothing survives closing the tab, so the user must Export before leaving.
 //
 //   await DB.init()                         open the database (app.js does this once)
 //   DB.run(sql, params)  -> { id, changes } INSERT / UPDATE / DELETE (saves automatically)
@@ -59,12 +61,18 @@ var DB = (function () {
     mode: "indexeddb",
     load: function () {
       return idb("readonly", function (s) { return s.get("main"); }).catch(function () {
-        store.mode = "localstorage";
-        var text = localStorage.getItem(KEY); // throws if site storage is disabled
-        return text ? fromBase64(text) : null;
+        try {
+          var text = localStorage.getItem(KEY); // throws if site storage is disabled
+          store.mode = "localstorage";
+          return text ? fromBase64(text) : null;
+        } catch (e) {
+          store.mode = "memory";
+          return null;
+        }
       });
     },
     save: function (bytes) {
+      if (store.mode === "memory") return Promise.resolve();
       if (store.mode === "indexeddb") {
         return idb("readwrite", function (s) { return s.put(bytes, "main"); });
       }
@@ -72,6 +80,7 @@ var DB = (function () {
       return Promise.resolve();
     },
     clear: function () {
+      if (store.mode === "memory") return Promise.resolve();
       if (store.mode === "indexeddb") {
         return idb("readwrite", function (s) { return s.delete("main"); });
       }

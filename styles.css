@@ -81,6 +81,16 @@ a:hover { color: var(--cap-vibrant); }
 }
 
 .loading, .empty { color: var(--cap-gray); }
+.notice {
+  box-sizing: border-box;
+  width: min(960px, calc(100% - 32px));
+  margin: 16px auto 0;
+  padding: 10px 14px;
+  border: 1px solid var(--cap-red);
+  border-radius: 8px;
+  background: var(--cap-white);
+  color: var(--cap-red);
+}
 .muted { color: var(--cap-gray); font-size: 14px; }
 .notes { white-space: pre-wrap; }
 

@@ -6,6 +6,8 @@ This repo is the **LIGHT** starter for the **Capgemini AI Product Crafting Lab �
 
 This file is read by **Codex** (`AGENTS.md`) and **Claude Code** (through `CLAUDE.md`). Any other coding agent should follow it too.
 
+**Who you're working with.** Every user is a **Capgemini employee on a locked-down corporate laptop**. Assume IT blocks things by default: installs, terminals, scripts, admin rights, some browser features, sometimes even site storage or downloads. Something being blocked is normal, not a failure — your job is to route around it and keep them building.
+
 **Stack: zero install, browser only.** The app is a single web page that runs by double-clicking `index.html` in Edge or Chrome. No server, no Node, no npm, no Python, no terminal, no network. Data is real SQLite (sql.js) kept inside the browser.
 
 ## Hard constraints (read first)
@@ -20,7 +22,7 @@ index.html          the only page; classic <script> tags in this order:
 styles.css          Capgemini blue defaults (system fonts)
 js/config.js        APP_NAME (also namespaces the browser-stored database)
 js/schema.js        SCHEMA_SQL — CREATE TABLE IF NOT EXISTS for every table; SCHEMA_UPGRADES for new columns
-js/db.js            SQLite via sql.js, saved to IndexedDB (localStorage fallback) after every write
+js/db.js            SQLite via sql.js, saved to IndexedDB → localStorage → memory only (Export to keep), after every write
 js/router.js        hash router + helpers: Router.on / Router.go / render / esc / toast
 js/app.js           the screens (ships with an "items" list → form → detail example to copy)
 vendor/sql-asm.js   SQLite compiled to plain JS (asm.js, not wasm — wasm can't load from file://). Never edit.
@@ -97,10 +99,31 @@ There is nothing to build or start. To check a change:
 - If you have no browser tool, open the page for the user (`Start-Process .\index.html` on Windows, `open index.html` on macOS) and tell them to press F5 on that tab.
 - Only then report success, in plain words.
 
+## When something is blocked or stuck: time-box, then fall back
+
+The lab lasts 2 hours. **Never sink time into one problem.**
+
+- **Two tries, then switch.** If the same fix fails twice (or about 5 minutes pass), stop pushing. Pick the next option on the ladder below, or a simpler way to get the same result for the user.
+- **A working simpler version beats a stuck perfect one.** Drop the fancy part (a chart, a drag-and-drop, an animation), ship the plain version, tell the user in one sentence, move on.
+- **Never stop at "it's blocked".** Always come back with what you did instead.
+- **Fallbacks must stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`, no internet — those are exactly what Capgemini laptops block, so they are never the way out.
+
+Fallback ladders (go down one step at a time):
+
+| Problem | 1st | 2nd | 3rd |
+|---|---|---|---|
+| **Saving data** | Browser storage (automatic) | `js/db.js` switches to localStorage on its own | **Memory only** (automatic): the app still works and shows a red note; tell the user to press **Export** before closing and **Import** next time. Then suggest the other browser (Edge ↔ Chrome) and flag it to a helper. |
+| **App won't start** (stuck on "Loading…" / blank) | Re-read `js/app.js` / `js/schema.js` for a syntax slip | Undo your last change and re-add it in smaller steps | Check the folder is unzipped on a local disk (not inside the zip, not OneDrive) and `vendor/sql-asm.js` is ~1.3 MB; if not, ask a helper for a fresh copy |
+| **Export blocked** (downloads disabled) | Try the other browser | Show the data on screen as a table the user can copy | — |
+| **Import blocked** (file picker disabled) | Try the other browser | Add a screen with a big text box to paste data into | — |
+| **You can't run commands** | Just edit the files — nothing needs to run | Ask the user to press F5 on the app tab | — |
+| **You have no browser tool** | Open `index.html` for the user | Ask them one plain question about what they see | — |
+| **A feature is too hard in plain JS** | Build it with plain HTML/CSS (tables, simple bars made of `<div>`s) | Cut it down to its simplest useful form | Tell the user what you built instead |
+
 ## Troubleshooting (fix it yourself, never hand back errors)
 
 - **Page stuck on "Loading…"** → a JavaScript error stopped the start. Check `js/app.js` / `js/schema.js` for a syntax slip (unclosed backtick, bracket, comma) or a bad SQL statement in `SCHEMA_SQL`.
-- **Message "site storage is disabled"** → the browser policy blocks saving data. That's a machine setting, not your code: try the other browser (Edge ↔ Chrome) and report it to the helpers.
+- **Red note "won't let the app keep your data"** → the browser policy blocks saving. The app keeps working in memory: tell the user to Export before closing, try the other browser (Edge ↔ Chrome), and flag it to a helper. Don't spend more time on it.
 - **New screen shows the list instead** → the `Router.on` pattern doesn't match the link, or `/x/:id` is registered before `/x/new`.
 - **"no such column"** after adding a field → the table already existed; add an `ALTER TABLE` line to `SCHEMA_UPGRADES`.
 - **Text with `<` breaks the layout** → a value isn't wrapped in `esc()`.

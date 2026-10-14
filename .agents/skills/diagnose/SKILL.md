@@ -52,7 +52,8 @@ This proves the browser runs the app **and** allows it to save data.
 
 Result:
 - Shows **Items** → `PASS`. If time allows, also click **New item**, save one, press F5, and confirm it is still there; then delete it.
-- Shows the message **"site storage is disabled"**, or stays on **Loading…** → `FAIL`: the browser's site storage (IndexedDB and localStorage) is disabled by policy for local files. Try the other browser (Edge ↔ Chrome) and report both results.
+- Shows **Items** with a red note **"This browser won't let the app keep your data"** → `WARN`: site storage (IndexedDB and localStorage) is disabled by policy for local files. The app works, but only in memory: data must be exported before closing. Try the other browser (Edge ↔ Chrome) and report both results.
+- Stays on **Loading…** or shows **"The app could not start"** → `FAIL`: the app files are damaged or JavaScript is blocked. Check steps 3–4 and policies.
 - Blank page / the file opens as text / download prompt → `FAIL`: `.html` files or `file://` pages are blocked.
 
 Do not use headless browser tricks (`--headless --dump-dom`) for this step: the page saves data asynchronously and headless snapshots are taken too early.

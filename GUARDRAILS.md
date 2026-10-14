@@ -24,3 +24,8 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
   `js/db.js`, `js/router.js`, `js/app.js`. A new script file is a last resort; if you add one,
   it is a classic script placed before `js/app.js`.
 - To check a change: reload `index.html` in the browser (F5). There is nothing to build or restart.
+
+**When something is blocked**
+- Users are Capgemini staff on locked-down laptops: blocked features are expected.
+- Two failed tries on the same problem → switch to the next fallback in `AGENTS.md`
+  ("When something is blocked or stuck"). Never break a rule above to get unstuck.

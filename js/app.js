@@ -123,11 +123,16 @@ document.title = APP_NAME;
 document.getElementById("app-name").textContent = APP_NAME;
 
 DB.init().then(function () {
+  if (DB.storage() === "memory") {
+    document.getElementById("app").insertAdjacentHTML("beforebegin",
+      `<p class="notice">This browser won't let the app keep your data after you close it.
+      Everything works, but press <strong>Export</strong> before closing, then <strong>Import</strong> next time.</p>`);
+  }
   Router.home("/items");
   Router.start();
 }).catch(function (e) {
   console.error(e);
   render(`<p class="loading">Loading…</p>
-    <p class="empty">This browser is not allowing the app to save data (site storage is disabled).
-    Try Edge or Chrome, or ask IT to allow site data for local files.</p>`);
+    <p class="empty">The app could not start. Close this tab, then open index.html again
+    from the unzipped folder, in Edge or Chrome.</p>`);
 });
