@@ -27,5 +27,6 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
 
 **When something is blocked**
 - Users are Capgemini staff on locked-down laptops: blocked features are expected.
-- Two failed tries on the same problem → switch to the next fallback in `AGENTS.md`
-  ("When something is blocked or stuck"). Never break a rule above to get unstuck.
+- Two failed tries on the same problem → find another simple way that works, quietly, without
+  burdening the user (see `AGENTS.md`, "When something is blocked or stuck").
+  Never break a rule above to get unstuck.

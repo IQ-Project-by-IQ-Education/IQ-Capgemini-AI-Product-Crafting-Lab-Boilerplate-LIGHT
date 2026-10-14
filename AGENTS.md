@@ -99,31 +99,27 @@ There is nothing to build or start. To check a change:
 - If you have no browser tool, open the page for the user (`Start-Process .\index.html` on Windows, `open index.html` on macOS) and tell them to press F5 on that tab.
 - Only then report success, in plain words.
 
-## When something is blocked or stuck: time-box, then fall back
+## When something is blocked or stuck: time-box, then find another way
 
 The lab lasts 2 hours. **Never sink time into one problem.**
 
-- **Two tries, then switch.** If the same fix fails twice (or about 5 minutes pass), stop pushing. Pick the next option on the ladder below, or a simpler way to get the same result for the user.
-- **A working simpler version beats a stuck perfect one.** Drop the fancy part (a chart, a drag-and-drop, an animation), ship the plain version, tell the user in one sentence, move on.
-- **Never stop at "it's blocked".** Always come back with what you did instead.
-- **Fallbacks must stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`, no internet — those are exactly what Capgemini laptops block, so they are never the way out.
+- **Two tries, then switch.** If the same fix fails twice (or about 5 minutes pass), stop pushing and find a different way to get the same result. Don't keep retrying the same idea.
+- **There is no fixed recipe.** Use your judgment: whatever is simplest and actually works on this laptop is the right answer. The examples below are ideas, not steps to follow in order.
+- **Keep it invisible to the user.** Solving blocks is your job, not theirs. Don't explain what failed, don't hand them steps, don't ask them to change settings. They should only see their app keep working. Involve them only if there is truly no other way (e.g. pressing F5, or saying what they see on screen).
+- **A working simpler version beats a stuck perfect one.** If a part is too hard, build a plain version that does the job and mention it in one sentence.
+- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`, no internet: those are exactly what Capgemini laptops block, so they are never the way out.
 
-Fallback ladders (go down one step at a time):
-
-| Problem | 1st | 2nd | 3rd |
-|---|---|---|---|
-| **Saving data** | Browser storage (automatic) | `js/db.js` switches to localStorage on its own | **Memory only** (automatic): the app still works and shows a red note; tell the user to press **Export** before closing and **Import** next time. Then suggest the other browser (Edge ↔ Chrome) and flag it to a helper. |
-| **App won't start** (stuck on "Loading…" / blank) | Re-read `js/app.js` / `js/schema.js` for a syntax slip | Undo your last change and re-add it in smaller steps | Check the folder is unzipped on a local disk (not inside the zip, not OneDrive) and `vendor/sql-asm.js` is ~1.3 MB; if not, ask a helper for a fresh copy |
-| **Export blocked** (downloads disabled) | Try the other browser | Show the data on screen as a table the user can copy | — |
-| **Import blocked** (file picker disabled) | Try the other browser | Add a screen with a big text box to paste data into | — |
-| **You can't run commands** | Just edit the files — nothing needs to run | Ask the user to press F5 on the app tab | — |
-| **You have no browser tool** | Open `index.html` for the user | Ask them one plain question about what they see | — |
-| **A feature is too hard in plain JS** | Build it with plain HTML/CSS (tables, simple bars made of `<div>`s) | Cut it down to its simplest useful form | Tell the user what you built instead |
+Ideas that often work:
+- **Saving is blocked** → `js/db.js` already handles it by itself (browser storage, then a simpler storage, then memory only with a red note asking to Export before closing, the only case where the user must act). Don't spend time on it; keep building.
+- **App won't start** → look for a syntax slip in what you just changed, or undo it and re-add it in smaller steps.
+- **A download or file picker is blocked** → show the data on screen, or let the user paste it into a text box.
+- **You can't run commands or have no browser tool** → nothing needs to run: edit the files and have the user press F5.
+- **A feature is hard in plain JS** → plain HTML/CSS usually does it (tables, bars made of `<div>`s, simple lists).
 
 ## Troubleshooting (fix it yourself, never hand back errors)
 
 - **Page stuck on "Loading…"** → a JavaScript error stopped the start. Check `js/app.js` / `js/schema.js` for a syntax slip (unclosed backtick, bracket, comma) or a bad SQL statement in `SCHEMA_SQL`.
-- **Red note "won't let the app keep your data"** → the browser policy blocks saving. The app keeps working in memory: tell the user to Export before closing, try the other browser (Edge ↔ Chrome), and flag it to a helper. Don't spend more time on it.
+- **Red note "won't let the app keep your data"** → the browser policy blocks saving. The app keeps working in memory and the note already tells the user to Export before closing. Don't spend more time on it.
 - **New screen shows the list instead** → the `Router.on` pattern doesn't match the link, or `/x/:id` is registered before `/x/new`.
 - **"no such column"** after adding a field → the table already existed; add an `ALTER TABLE` line to `SCHEMA_UPGRADES`.
 - **Text with `<` breaks the layout** → a value isn't wrapped in `esc()`.
