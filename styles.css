@@ -1,0 +1,152 @@
+/* Capgemini blue defaults. System fonts only — no web fonts, no CDN. */
+:root {
+  --cap-blue: #0070ad;
+  --cap-vibrant: #12abdb;
+  --cap-deep: #003d5c;
+  --cap-ink: #1a1a1a;
+  --cap-gray: #5a6872;
+  --cap-line: #e3e8ec;
+  --cap-surface: #f5f7f9;
+  --cap-white: #ffffff;
+  --cap-red: #b42318;
+  --shadow: 0 2px 8px rgba(0, 61, 92, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  color: var(--cap-ink);
+  background: var(--cap-surface);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { color: var(--cap-deep); line-height: 1.15; margin: 0 0 8px; }
+h1 { font-size: 28px; }
+
+a { color: var(--cap-blue); }
+a:hover { color: var(--cap-vibrant); }
+
+/* ---------- Header ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  background: var(--cap-white);
+  border-bottom: 1px solid var(--cap-line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--cap-deep);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.brand img { height: 32px; width: auto; }
+
+.data-actions { display: flex; gap: 8px; }
+.data-actions button { min-height: 34px; padding: 6px 12px; font-size: 14px; }
+
+/* ---------- Layout ---------- */
+.shell {
+  width: min(960px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 64px;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--cap-white);
+  border: 1px solid var(--cap-line);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.loading, .empty { color: var(--cap-gray); }
+.muted { color: var(--cap-gray); font-size: 14px; }
+.notes { white-space: pre-wrap; }
+
+/* ---------- Lists ---------- */
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--cap-white);
+  border: 1px solid var(--cap-line);
+  border-radius: 8px;
+  color: var(--cap-ink);
+  text-decoration: none;
+}
+.list a:hover { border-color: var(--cap-blue); }
+
+/* ---------- Buttons ---------- */
+button, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 20px;
+  border: 1px solid var(--cap-blue);
+  border-radius: 6px;
+  background: var(--cap-white);
+  color: var(--cap-blue);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+button:hover, .button:hover { background: var(--cap-surface); color: var(--cap-deep); }
+
+button.primary, .button.primary { background: var(--cap-blue); color: var(--cap-white); }
+button.primary:hover, .button.primary:hover { background: var(--cap-deep); color: var(--cap-white); }
+
+button.danger { border-color: var(--cap-red); color: var(--cap-red); }
+
+.actions { display: flex; gap: 8px; margin-top: 16px; }
+
+/* ---------- Forms ---------- */
+.form { display: grid; gap: 16px; }
+.form label { display: grid; gap: 6px; font-weight: 600; color: var(--cap-deep); }
+input, textarea, select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--cap-line);
+  border-radius: 6px;
+  background: var(--cap-white);
+  color: var(--cap-ink);
+}
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--cap-vibrant); border-color: transparent; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: var(--cap-deep);
+  color: var(--cap-white);
+  box-shadow: var(--shadow);
+}
+.toast[hidden] { display: none; }

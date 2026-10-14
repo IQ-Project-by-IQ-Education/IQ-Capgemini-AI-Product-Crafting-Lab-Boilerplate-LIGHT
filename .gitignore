@@ -1,0 +1,4 @@
+.DS_Store
+# Claude Code status line (machine-local)
+.claude/current-task
+*.zip

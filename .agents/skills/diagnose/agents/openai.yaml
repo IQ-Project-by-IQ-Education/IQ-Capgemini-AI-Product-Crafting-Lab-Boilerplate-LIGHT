@@ -1,0 +1,8 @@
+interface:
+  display_name: "Diagnose"
+  short_description: "Laptop readiness check, nothing to install"
+  brand_color: "#0070AD"
+  default_prompt: "Use $diagnose to check this laptop is ready for the LIGHT lab and print the PASS / FAIL report."
+
+policy:
+  allow_implicit_invocation: true

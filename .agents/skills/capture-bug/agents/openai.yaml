@@ -1,0 +1,8 @@
+interface:
+  display_name: "Capture Bug"
+  short_description: "Collect bug context from a non-technical user"
+  brand_color: "#0070AD"
+  default_prompt: "Use $capture-bug to help me describe what isn't working and gather the error so it can be fixed."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Kickoff"
+  short_description: "Name the app and open it in the browser"
+  brand_color: "#0070AD"
+  default_prompt: "Use $kickoff to name my app and open it in the browser."
+
+policy:
+  allow_implicit_invocation: true

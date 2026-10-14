@@ -1,0 +1,8 @@
+interface:
+  display_name: "Capgemini UI Design"
+  short_description: "Style any UI with the Capgemini brand"
+  brand_color: "#0070AD"
+  default_prompt: "Use $capgemini-ui-design to build and style UI that follows the Capgemini brand identity."
+
+policy:
+  allow_implicit_invocation: true

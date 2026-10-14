@@ -1,0 +1,8 @@
+interface:
+  display_name: "IQ Project Slides"
+  short_description: "Open the lab slides"
+  brand_color: "#0070AD"
+  default_prompt: "Use $iq-project-slides to open the Capgemini AI Product Crafting Lab slides."
+
+policy:
+  allow_implicit_invocation: true

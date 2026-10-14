@@ -1,0 +1,8 @@
+interface:
+  display_name: "Master Prompt"
+  short_description: "Open the master prompt maker"
+  brand_color: "#0070AD"
+  default_prompt: "Use $masterprompt to open the master prompt maker and guide the next steps."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Give Me Ideas"
+  short_description: "Suggest four COMEX app ideas"
+  brand_color: "#0070AD"
+  default_prompt: "Use $givemeideas to suggest four Capgemini COMEX app ideas."
+
+policy:
+  allow_implicit_invocation: true
