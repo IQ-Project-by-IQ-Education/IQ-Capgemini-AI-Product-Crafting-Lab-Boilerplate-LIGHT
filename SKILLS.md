@@ -8,7 +8,7 @@ Skills work in **Codex** and **Claude Code**.
 
 Edit a skill only in `.agents/skills/`. If you change its name or description, copy the new header into its `.claude/skills/` pointer. Do not add a `.codex/skills/` folder (Codex would list every skill twice).
 
-Every skill ends with the same **Lab guardrails** block (no npm/node/python, no server, no framework, no modules or local `fetch()`, no second HTML page; outside services only if they work, 5-minute rule). The full list is `GUARDRAILS.md`.
+Every skill ends with the same **Lab guardrails** block (no npm/node/python, no server, no framework, no modules or local `fetch()`, no second HTML page; outside services only if they work, hard rule: after 5 minutes without success, back to the base boilerplate). The full list is `GUARDRAILS.md`.
 
 | Skill | For | What it does | Changed from the Next.js starter |
 |---|---|---|---|

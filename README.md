@@ -100,7 +100,7 @@ Details for helpers: [`SKILLS.md`](SKILLS.md).
 
 **If the app stays on "Loading…"** or says *"site storage is disabled"*: the browser policy blocks saved data for local pages. Try the other browser (Edge ↔ Chrome); otherwise IT must allow site data for `file://` pages.
 
-**Rules for the assistant** live in [`AGENTS.md`](AGENTS.md) (Codex reads it directly, Claude Code through `CLAUDE.md`) and [`GUARDRAILS.md`](GUARDRAILS.md): no installs, no server, no framework, everything goes in `js/app.js` and `js/schema.js`. Online services are fine if they work; if one is blocked for more than 5 minutes, the assistant moves on to another way.
+**Rules for the assistant** live in [`AGENTS.md`](AGENTS.md) (Codex reads it directly, Claude Code through `CLAUDE.md`) and [`GUARDRAILS.md`](GUARDRAILS.md): no installs, no server, no framework, everything goes in `js/app.js` and `js/schema.js`. Online services are allowed only if they work: hard rule, after 5 minutes without success the assistant removes it and sticks to the base boilerplate.
 
 ---
 

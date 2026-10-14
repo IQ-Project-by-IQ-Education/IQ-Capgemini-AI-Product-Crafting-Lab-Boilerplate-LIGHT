@@ -39,6 +39,6 @@ This lab runs on locked-down laptops: the app is one page opened from the folder
 - use `type="module"`, `import`/`export`, or `fetch()` of local files;
 - create another HTML page.
 
-Outside services (AI APIs, CDN libraries, web fonts) are allowed **if they work**. If one fails or you're stuck on it for more than 5 minutes, drop it and move on to another way; the app must never break or hang because of it.
+Outside services (AI APIs, CDN libraries, web fonts) are allowed **only if they work**. **Hard rule:** if one doesn't work within 5 minutes, stop, remove every trace of it and build with the base boilerplate only. Never try another outside service instead, and never let one break or hang the app.
 
 App code goes only in `js/app.js`, `js/schema.js` and `styles.css`, following the `items` example and the `DB` / `Router` helpers. Full list: `GUARDRAILS.md` at the project root.

@@ -12,7 +12,7 @@ This file is read by **Codex** (`AGENTS.md`) and **Claude Code** (through `CLAUD
 
 ## Hard constraints (read first)
 
-Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server, never a framework or build step, never `type="module"` or `fetch()` of local files, never a second HTML page. Outside services are fine if they work, with the 5-minute rule. Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
+Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server, never a framework or build step, never `type="module"` or `fetch()` of local files, never a second HTML page. Outside services only if they work; **hard rule: if one doesn't work within 5 minutes, remove it and stick to the base boilerplate.** Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
 
 ## Files
 
@@ -107,7 +107,7 @@ The lab lasts 2 hours. **Never sink time into one problem.**
 - **There is no fixed recipe.** Use your judgment: whatever is simplest and actually works on this laptop is the right answer. The examples below are ideas, not steps to follow in order.
 - **Keep it invisible to the user.** Solving blocks is your job, not theirs. Don't explain what failed, don't hand them steps, don't ask them to change settings. They should only see their app keep working. Involve them only if there is truly no other way (e.g. pressing F5, or saying what they see on screen).
 - **A working simpler version beats a stuck perfect one.** If a part is too hard, build a plain version that does the job and mention it in one sentence.
-- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`: those are exactly what Capgemini laptops block, so they are never the way out. An outside service is a fine way out **if it works**; if it doesn't within 5 minutes, drop it too.
+- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`: those are exactly what Capgemini laptops block, so they are never the way out. An outside service is allowed **only if it works**; if it doesn't within 5 minutes, remove it and stick to the base boilerplate (hard rule, see *Outside services*).
 
 Ideas that often work:
 - **Saving is blocked** → `js/db.js` already handles it by itself (browser storage, then a simpler storage, then memory only with a red note asking to Export before closing, the only case where the user must act). Don't spend time on it; keep building.
@@ -121,7 +121,13 @@ Ideas that often work:
 The app can use online services: an AI API (e.g. OpenAI with the key the participant got from a trainer), a public data API, Microsoft 365 data, or a library / web font from a CDN (`https://cdn.jsdelivr.net/npm/...`).
 
 - **Try it once, quickly.** Wire it in, press F5, see if it answers. Corporate networks often block these (proxy, CORS error, blocked domain), that's normal.
-- **5-minute rule.** If it doesn't work, or stalls for more than 5 minutes, **drop it and move on**: build the same thing another way (plain JS, local data, a simpler version), or leave that feature out and continue with the rest. Mention it in one plain sentence ("The AI part isn't reachable from this laptop, so I made a simpler version that works offline."). Don't keep debugging the network.
+- **HARD RULE — 5 minutes, then back to the base boilerplate. No exceptions.** If the service doesn't work within 5 minutes of starting on it:
+  1. Stop. No more retries, no network debugging.
+  2. Remove every trace of it: its `<script>` / `<link>` tag, its calls, its key line in `js/config.js`.
+  3. Build that feature with the **base boilerplate only** (`index.html` + `js/` + the built-in database, plain HTML/JS, local data), or a simpler version of it.
+  4. Do **not** try a different outside service instead.
+
+  Tell the user in one plain sentence: *"That online service isn't reachable from this laptop, so I built it without it."*
 - **Never let it break the app.** The app must still open and keep its saved data if the service is down. Give every call a timeout and a plain failure message:
   ```js
   function callOutside(url, options) {
@@ -146,7 +152,7 @@ The app can use online services: an AI API (e.g. OpenAI with the key the partici
 ## Live challenge guardrails
 
 - Keep the app small enough to finish in 2 hours: a few clear screens and only the data the idea truly needs.
-- No new accounts or complex permissions. Outside services only if they work quickly (5-minute rule).
+- No new accounts or complex permissions. Outside services only if they work; after 5 minutes without success, back to the base boilerplate (hard rule).
 - If the idea is large, build the smallest useful version first, show it, then improve it.
 
 ## Security considerations

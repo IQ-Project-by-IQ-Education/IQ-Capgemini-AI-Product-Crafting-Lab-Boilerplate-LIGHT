@@ -23,12 +23,17 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
   it is a classic script placed before `js/app.js`.
 - To check a change: reload `index.html` in the browser (F5). There is nothing to build or restart.
 
-**Outside services are allowed — if they work** (5-minute rule)
+**Outside services are allowed — only if they work** (HARD RULE: 5 minutes, then base boilerplate)
 - The app may use online services and resources: an AI API (OpenAI…), a public data API, a library
   or web font loaded from a CDN (`<script src="https://cdn.jsdelivr.net/…">`), Microsoft 365 data.
-- **5-minute rule:** if a service doesn't work on this laptop (blocked, CORS error, no key, no answer)
-  or you've been stuck on it for more than 5 minutes, drop it and move on: build the feature another
-  way (plain JS, local data, a simpler version) or move to the next part of the app.
+- **HARD RULE — 5 minutes, then back to the base boilerplate.** If an outside service doesn't work
+  on this laptop (blocked, CORS error, no key, no answer) within 5 minutes of starting on it:
+  1. stop, no more retries or debugging;
+  2. remove every trace of it (its `<script>`/`<link>` tag, its calls, its key line);
+  3. build that feature with the base boilerplate only: `index.html` + `js/` + the built-in
+     database, plain HTML/JS, local data;
+  4. do not try a different outside service instead.
+  No exceptions. The base boilerplate is always the fallback.
 - **Optional, never load-bearing:** the app must still open and its saved data still work if the
   service is down. Every outside call gets a timeout (about 20 s) and a plain message on failure
   ("AI is unavailable right now"), never an endless spinner. A CDN library is loaded with a classic
@@ -39,6 +44,6 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
 
 **When something is blocked**
 - Users are Capgemini staff on locked-down laptops: blocked features are expected.
-- Two failed tries on the same problem → find another simple way that works, quietly, without
-  burdening the user (see `AGENTS.md`, "When something is blocked or stuck").
+- Two failed tries on the same problem → find another simple way that works inside the base
+  boilerplate, quietly, without burdening the user (see `AGENTS.md`, "When something is blocked or stuck").
   Never break a rule above to get unstuck.
