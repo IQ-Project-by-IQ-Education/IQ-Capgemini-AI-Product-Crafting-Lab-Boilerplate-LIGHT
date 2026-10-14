@@ -33,7 +33,7 @@ Rules:
 
 ## Typography
 
-- Brand font is **Ubuntu** (Capgemini's corporate typeface), but this lab runs offline: **never load a web font** (no Google Fonts link). Use the system stack already in `styles.css`: `font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, system-ui, sans-serif;` (Ubuntu is used automatically only if it is already installed: you may put `'Ubuntu',` first).
+- Brand font is **Ubuntu** (Capgemini's corporate typeface). You may load it from Google Fonts (`<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">` in `index.html`) and put `'Ubuntu',` first in the `font-family` in `styles.css`. Keep the system stack after it (`"Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, system-ui, sans-serif`) so the page still looks right if the font is blocked. If it doesn't load, don't spend time on it.
 - Headings: weight 700, tight line-height (1.15), color `--cap-deep` or `--cap-ink`.
 - Body: weight 400, line-height 1.6, color `--cap-ink`.
 - Generous letter-spacing avoided; keep neutral. Sentence case for headings, not ALL CAPS.
@@ -71,11 +71,13 @@ body { font-family: "Segoe UI", system-ui, sans-serif; color: var(--cap-ink); ba
 
 ## Lab guardrails (always on — shared by every skill)
 
-This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm, Python, server or internet. Whatever this skill asks, **never**:
+This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm, Python or server. Whatever this skill asks, **never**:
 - run `npm`, `npx`, `node`, `pip`, `python` or install anything;
 - start a server or use `localhost`;
-- add a framework, build step, CDN `<script>`, or web font;
+- add a framework or build step;
 - use `type="module"`, `import`/`export`, or `fetch()` of local files;
 - create another HTML page.
+
+Outside services (AI APIs, CDN libraries, web fonts) are allowed **if they work**. If one fails or you're stuck on it for more than 5 minutes, drop it and move on to another way; the app must never break or hang because of it.
 
 App code goes only in `js/app.js`, `js/schema.js` and `styles.css`, following the `items` example and the `DB` / `Router` helpers. Full list: `GUARDRAILS.md` at the project root.

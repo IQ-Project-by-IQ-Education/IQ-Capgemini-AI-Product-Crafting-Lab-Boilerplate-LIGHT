@@ -8,7 +8,7 @@ Skills work in **Codex** and **Claude Code**.
 
 Edit a skill only in `.agents/skills/`. If you change its name or description, copy the new header into its `.claude/skills/` pointer. Do not add a `.codex/skills/` folder (Codex would list every skill twice).
 
-Every skill ends with the same **Lab guardrails** block (no npm/node/python, no server, no framework/CDN/web font, no modules or local `fetch()`, no second HTML page). The full list is `GUARDRAILS.md`.
+Every skill ends with the same **Lab guardrails** block (no npm/node/python, no server, no framework, no modules or local `fetch()`, no second HTML page; outside services only if they work, 5-minute rule). The full list is `GUARDRAILS.md`.
 
 | Skill | For | What it does | Changed from the Next.js starter |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Every skill ends with the same **Lab guardrails** block (no npm/node/python, no 
 | `/kickoff` | Participant | Sets `APP_NAME` in `js/config.js` from the spec, leaves the items example, opens `index.html` (`Start-Process` / `start` on Windows, `open` on macOS), confirms **Items**, gives the `file://` link to bookmark. | No `npm install`, no `npm run dev`, no localhost. Nothing is installed or started. |
 | `/givemeideas` | Participant | Four executive-friendly app ideas. | Unchanged (guardrail added). |
 | `/masterprompt` | Participant | Opens the master prompt maker, then points to `/kickoff`. | Kickoff wording ("open", not "install and run"). |
-| `/capgemini-ui-design` | Agent | Capgemini colors, type, components, logo. Output goes to `styles.css` and the `render()` templates in `js/app.js`. | No Google Fonts (system fonts), no `next/image`, logo at `assets/capgemini-logo.png` (relative path). |
+| `/capgemini-ui-design` | Agent | Capgemini colors, type, components, logo. Output goes to `styles.css` and the `render()` templates in `js/app.js`. | Google Fonts optional with system-font fallback, no `next/image`, logo at `assets/capgemini-logo.png` (relative path). |
 | `/capture-bug` | Participant | Collects the bug context step by step (in French), then fixes it. | Browser console only (no terminal), "Loading…" / "site storage is disabled" cases, F5 to see changes, fixes only in `js/app.js` / `js/schema.js` / `styles.css`. |
 | `/iq-project-slides` | Participant | Opens the lab slides. | Unchanged (guardrail added). |
 

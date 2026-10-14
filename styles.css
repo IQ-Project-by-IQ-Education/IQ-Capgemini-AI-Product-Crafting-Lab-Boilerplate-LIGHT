@@ -1,4 +1,4 @@
-/* Capgemini blue defaults. System fonts only — no web fonts, no CDN. */
+/* Capgemini blue defaults. System fonts (a web font is optional, keep these as fallback). */
 :root {
   --cap-blue: #0070ad;
   --cap-vibrant: #12abdb;

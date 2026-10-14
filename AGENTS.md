@@ -8,11 +8,11 @@ This file is read by **Codex** (`AGENTS.md`) and **Claude Code** (through `CLAUD
 
 **Who you're working with.** Every user is a **Capgemini employee on a locked-down corporate laptop**. Assume IT blocks things by default: installs, terminals, scripts, admin rights, some browser features, sometimes even site storage or downloads. Something being blocked is normal, not a failure — your job is to route around it and keep them building.
 
-**Stack: zero install, browser only.** The app is a single web page that runs by double-clicking `index.html` in Edge or Chrome. No server, no Node, no npm, no Python, no terminal, no network. Data is real SQLite (sql.js) kept inside the browser.
+**Stack: zero install, browser only.** The app is a single web page that runs by double-clicking `index.html` in Edge or Chrome. No server, no Node, no npm, no Python, no terminal. Data is real SQLite (sql.js) kept inside the browser. Outside services (AI APIs, online libraries) are allowed **when they work** (see *Outside services*).
 
 ## Hard constraints (read first)
 
-Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server, never a framework or build step, never a CDN or web font, never `type="module"` or `fetch()` of local files, never a second HTML page. Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
+Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server, never a framework or build step, never `type="module"` or `fetch()` of local files, never a second HTML page. Outside services are fine if they work, with the 5-minute rule. Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
 
 ## Files
 
@@ -63,7 +63,7 @@ These govern every message to the user. They override default verbosity.
 - **Be fast — build, don't discuss.** Run the loop **Hear → Build → Show → Ask what's next.** Get something visible fast, then improve it. Don't ask permission for obvious technical work.
 - **Ask only business/product questions** (*"Who is this for?"*, *"What should happen when they click that?"*). **Never** ask technical questions — decide those yourself.
 - **Fix everything yourself.** Never hand back an error or ask them to debug. Say *"On it — fixing that now,"* fix it, check it, then *"Fixed — press F5 and try again."*
-- **Save data automatically.** If the app must remember something, add it to the built-in database silently. Never ask for accounts or outside services. Just say *"it's saved."*
+- **Save data automatically.** If the app must remember something, add it to the built-in database silently. Never ask them to create accounts. Just say *"it's saved."*
 
 ## How to build a feature (the pattern)
 
@@ -103,11 +103,11 @@ There is nothing to build or start. To check a change:
 
 The lab lasts 2 hours. **Never sink time into one problem.**
 
-- **Two tries, then switch.** If the same fix fails twice (or about 5 minutes pass), stop pushing and find a different way to get the same result. Don't keep retrying the same idea.
+- **Two tries or 5 minutes, then switch.** If the same fix fails twice, or you've been stuck on something for more than 5 minutes, stop pushing and find a different way to get the same result. Don't keep retrying the same idea.
 - **There is no fixed recipe.** Use your judgment: whatever is simplest and actually works on this laptop is the right answer. The examples below are ideas, not steps to follow in order.
 - **Keep it invisible to the user.** Solving blocks is your job, not theirs. Don't explain what failed, don't hand them steps, don't ask them to change settings. They should only see their app keep working. Involve them only if there is truly no other way (e.g. pressing F5, or saying what they see on screen).
 - **A working simpler version beats a stuck perfect one.** If a part is too hard, build a plain version that does the job and mention it in one sentence.
-- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`, no internet: those are exactly what Capgemini laptops block, so they are never the way out.
+- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`: those are exactly what Capgemini laptops block, so they are never the way out. An outside service is a fine way out **if it works**; if it doesn't within 5 minutes, drop it too.
 
 Ideas that often work:
 - **Saving is blocked** → `js/db.js` already handles it by itself (browser storage, then a simpler storage, then memory only with a red note asking to Export before closing, the only case where the user must act). Don't spend time on it; keep building.
@@ -115,6 +115,25 @@ Ideas that often work:
 - **A download or file picker is blocked** → show the data on screen, or let the user paste it into a text box.
 - **You can't run commands or have no browser tool** → nothing needs to run: edit the files and have the user press F5.
 - **A feature is hard in plain JS** → plain HTML/CSS usually does it (tables, bars made of `<div>`s, simple lists).
+
+## Outside services (allowed if they work)
+
+The app can use online services: an AI API (e.g. OpenAI with the key the participant got from a trainer), a public data API, Microsoft 365 data, or a library / web font from a CDN (`https://cdn.jsdelivr.net/npm/...`).
+
+- **Try it once, quickly.** Wire it in, press F5, see if it answers. Corporate networks often block these (proxy, CORS error, blocked domain), that's normal.
+- **5-minute rule.** If it doesn't work, or stalls for more than 5 minutes, **drop it and move on**: build the same thing another way (plain JS, local data, a simpler version), or leave that feature out and continue with the rest. Mention it in one plain sentence ("The AI part isn't reachable from this laptop, so I made a simpler version that works offline."). Don't keep debugging the network.
+- **Never let it break the app.** The app must still open and keep its saved data if the service is down. Give every call a timeout and a plain failure message:
+  ```js
+  function callOutside(url, options) {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, 20000);
+    return fetch(url, Object.assign({}, options, { signal: ctrl.signal }))
+      .finally(function () { clearTimeout(timer); });
+  }
+  // callOutside(...).then(...).catch(function () { toast("This feature is unavailable right now"); });
+  ```
+- **Libraries from a CDN** go in `index.html` as a classic `<script src="https://...">` placed before `js/app.js`. Check it loaded before using it (`if (window.Chart) { ... } else { /* plain fallback */ }`). No frameworks (React, Vue…) even from a CDN.
+- **Keys** go in `js/config.js` (e.g. `var OPENAI_API_KEY = "";`) and the user pastes theirs. Never invent one, never ask them to sign up for something new.
 
 ## Troubleshooting (fix it yourself, never hand back errors)
 
@@ -127,11 +146,12 @@ Ideas that often work:
 ## Live challenge guardrails
 
 - Keep the app small enough to finish in 2 hours: a few clear screens and only the data the idea truly needs.
-- No accounts, outside services, keys, uploads to the internet, or complex permissions.
+- No new accounts or complex permissions. Outside services only if they work quickly (5-minute rule).
 - If the idea is large, build the smallest useful version first, show it, then improve it.
 
 ## Security considerations
 
 - Always use `?` placeholders in SQL — never glue user input into the SQL text.
 - Always wrap user values in `esc()` before putting them into HTML.
-- All data stays in the participant's browser. Export/Import/Reset buttons in the header manage it.
+- The app's saved data stays in the participant's browser. Export/Import/Reset buttons in the header manage it. Only send to an outside service what the feature needs.
+- A key in `js/config.js` is visible to anyone who gets the folder: tell the user not to share the folder or the zip once a key is in it.

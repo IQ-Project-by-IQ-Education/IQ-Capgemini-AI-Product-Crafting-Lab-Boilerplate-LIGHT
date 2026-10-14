@@ -8,10 +8,8 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
 - Never run or suggest `npm`, `npx`, `node`, `pip`, `python`, `yarn`, `pnpm`, or any install.
 - Never start a server (`localhost`, `http-server`, `python -m http.server`, Live Server…).
 - Never add a framework or build step (React, Vue, Next, Vite, Tailwind, TypeScript, JSX…).
-- Never add a `<script>` or `<link>` pointing to the internet (CDN, Google Fonts, unpkg, jsdelivr…).
 - Never use `type="module"`, `import`/`export`, or `fetch()` of local files — they fail on `file://`.
 - Never create a second HTML page. New screens are hash routes (`#/thing`) in `js/app.js`.
-- Never call an outside service or API, and never ask for accounts or keys.
 
 **Always**
 - Screens and behavior go in `js/app.js`, copying the `items` example (list → form → detail).
@@ -24,6 +22,20 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
   `js/db.js`, `js/router.js`, `js/app.js`. A new script file is a last resort; if you add one,
   it is a classic script placed before `js/app.js`.
 - To check a change: reload `index.html` in the browser (F5). There is nothing to build or restart.
+
+**Outside services are allowed — if they work** (5-minute rule)
+- The app may use online services and resources: an AI API (OpenAI…), a public data API, a library
+  or web font loaded from a CDN (`<script src="https://cdn.jsdelivr.net/…">`), Microsoft 365 data.
+- **5-minute rule:** if a service doesn't work on this laptop (blocked, CORS error, no key, no answer)
+  or you've been stuck on it for more than 5 minutes, drop it and move on: build the feature another
+  way (plain JS, local data, a simpler version) or move to the next part of the app.
+- **Optional, never load-bearing:** the app must still open and its saved data still work if the
+  service is down. Every outside call gets a timeout (about 20 s) and a plain message on failure
+  ("AI is unavailable right now"), never an endless spinner. A CDN library is loaded with a classic
+  `<script>` tag before `js/app.js`, and the code checks it exists before using it.
+- **Keys:** if a service needs a key, the user pastes the one they were given (e.g. from a trainer);
+  keep it in `js/config.js` (e.g. `var OPENAI_API_KEY = "";`). Never invent a key or make the user sign
+  up for something new during the lab.
 
 **When something is blocked**
 - Users are Capgemini staff on locked-down laptops: blocked features are expected.

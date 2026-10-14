@@ -32,11 +32,13 @@ Workflow:
 
 ## Lab guardrails (always on — shared by every skill)
 
-This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm, Python, server or internet. Whatever this skill asks, **never**:
+This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm, Python or server. Whatever this skill asks, **never**:
 - run `npm`, `npx`, `node`, `pip`, `python` or install anything;
 - start a server or use `localhost`;
-- add a framework, build step, CDN `<script>`, or web font;
+- add a framework or build step;
 - use `type="module"`, `import`/`export`, or `fetch()` of local files;
 - create another HTML page.
+
+Outside services (AI APIs, CDN libraries, web fonts) are allowed **if they work**. If one fails or you're stuck on it for more than 5 minutes, drop it and move on to another way; the app must never break or hang because of it.
 
 App code goes only in `js/app.js`, `js/schema.js` and `styles.css`, following the `items` example and the `DB` / `Router` helpers. Full list: `GUARDRAILS.md` at the project root.

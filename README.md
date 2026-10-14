@@ -27,7 +27,7 @@ The **LIGHT** starter kit for the **Capgemini AI Product Crafting Lab — Lab 2*
 
 A **senior, non-technical executive** has **2 hours** to build any small app they can imagine. They describe the idea in everyday language to an AI assistant (Codex or Claude Code) — and the assistant builds **all of it**.
 
-This version is made for **locked-down Capgemini laptops**: no Node, no npm, no Python, no server, no terminal, no internet needed. The whole app is **one web page** that opens straight from the folder in **Edge or Chrome**, with a real database saved inside the browser.
+This version is made for **locked-down Capgemini laptops**: no Node, no npm, no Python, no server, no terminal needed. The whole app is **one web page** that opens straight from the folder in **Edge or Chrome**, with a real database saved inside the browser.
 
 > **In one line:** you talk, the app appears — and it opens with a double-click.
 
@@ -53,7 +53,7 @@ Each time the assistant changes something, press **F5** on your app's tab to see
 - Everything you add is saved **inside your browser**, on this computer only (in the browser's site storage for this page).
 - It's still there after you close and reopen the browser.
 - It is **per browser**: data saved in Edge doesn't appear in Chrome. Clearing the browser's site data erases it.
-- Nothing is ever sent to the internet.
+- Your saved data never leaves the browser, unless you add a feature that uses an online service (an AI, for example).
 
 ### Export · Import · Reset
 
@@ -100,7 +100,7 @@ Details for helpers: [`SKILLS.md`](SKILLS.md).
 
 **If the app stays on "Loading…"** or says *"site storage is disabled"*: the browser policy blocks saved data for local pages. Try the other browser (Edge ↔ Chrome); otherwise IT must allow site data for `file://` pages.
 
-**Rules for the assistant** live in [`AGENTS.md`](AGENTS.md) (Codex reads it directly, Claude Code through `CLAUDE.md`) and [`GUARDRAILS.md`](GUARDRAILS.md): no installs, no server, no framework, no internet — everything goes in `js/app.js` and `js/schema.js`.
+**Rules for the assistant** live in [`AGENTS.md`](AGENTS.md) (Codex reads it directly, Claude Code through `CLAUDE.md`) and [`GUARDRAILS.md`](GUARDRAILS.md): no installs, no server, no framework, everything goes in `js/app.js` and `js/schema.js`. Online services are fine if they work; if one is blocked for more than 5 minutes, the assistant moves on to another way.
 
 ---
 
