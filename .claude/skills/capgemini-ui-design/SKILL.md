@@ -13,5 +13,5 @@ These instructions are shared with Codex. When they say "Codex", read it as you 
 - Codex file tools → your Read / Edit / Write tools.
 - Codex terminal tool → your Bash tool (on Windows, call `powershell.exe -NoProfile -Command "..."` through it when PowerShell is required).
 - "Approve for me" / default shell access on Codex → Claude Code's permission mode. Report whether commands ran without a permission prompt or whether each one needed approval.
-- Codex in-app browser → any browser tool you have (for example Claude in Chrome or Playwright) opened on the `file:///.../index.html` link; if none is available, open the page with `Start-Process` / `open` and ask the user what they see.
-- Never fall back to npm, node, python, a local server or `curl http://localhost` to check the app — there is no server in this lab.
+- Codex in-app browser → any browser tool you have (for example Claude in Chrome or Playwright) opened on the app's link from `lab-mode.txt` (or `file:///.../index.html` before `/kickoff`); if none is available, open the page with `Start-Process` / `open` and ask the user what they see.
+- Never use npm, node, python or any other local server to run or check the app. The only server allowed is the built-in `tools/serve.ps1`.

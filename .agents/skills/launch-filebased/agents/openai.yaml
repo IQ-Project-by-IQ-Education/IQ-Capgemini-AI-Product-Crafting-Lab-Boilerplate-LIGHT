@@ -1,0 +1,8 @@
+interface:
+  display_name: "Launch file-based (trainer)"
+  short_description: "Force the app to open from the file"
+  brand_color: "#0070AD"
+  default_prompt: "Use $launch-filebased to switch this app to file mode."
+
+policy:
+  allow_implicit_invocation: false

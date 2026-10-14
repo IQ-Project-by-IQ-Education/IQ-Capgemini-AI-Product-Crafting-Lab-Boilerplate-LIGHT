@@ -15,7 +15,7 @@ Launch the base app "our new way": a single page, nothing to install. **This is 
 - **Localhost mode** (preferred when it works): the built-in Windows server `tools/serve.ps1` serves the folder on `http://localhost:<port>/`. No Node, no install, no admin rights, this computer only.
 - **File mode** (always works): the browser opens `index.html` straight from the folder (`file:///…`).
 
-The choice is saved in `lab-mode.txt` and never changed afterwards: the browser keeps the app's saved data separately for each address, so switching later would make the data look gone.
+The choice is saved in `lab-mode.txt` and never changed afterwards (only a trainer can override it, with `/launch-filebased` or `/launch-serverbased`): the browser keeps the app's saved data separately for each address, so switching later would make the data look gone.
 
 Rules:
 - Do it yourself; keep the participant updated in one or two plain sentences.

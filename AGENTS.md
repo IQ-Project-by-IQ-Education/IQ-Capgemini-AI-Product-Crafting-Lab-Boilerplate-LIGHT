@@ -47,6 +47,7 @@ If the user types one of these phrases, use the matching skill:
 - `/capgemini-ui-design`, `$capgemini-ui-design`, "Capgemini design", "charte Capgemini", or any request to style the UI: use `.agents/skills/capgemini-ui-design/SKILL.md`.
 - `/capture-bug`, `$capture-bug`, or when the user reports a problem they can't explain ("ça marche pas", "j'ai une erreur", "page blanche"): use `.agents/skills/capture-bug/SKILL.md`.
 - `/iq-project-slides`, `$iq-project-slides`, "slides", "open the slides": use `.agents/skills/iq-project-slides/SKILL.md`.
+- **Trainer only** (never run these on your own, only when typed): `/launch-filebased` or `$launch-filebased` → `.agents/skills/launch-filebased/SKILL.md`; `/launch-serverbased` or `$launch-serverbased` → `.agents/skills/launch-serverbased/SKILL.md`. They override the mode `/kickoff` chose.
 
 ## Interaction rules (how to talk to the user)
 
@@ -116,7 +117,7 @@ API reference: `DB.run(sql, params)`, `DB.all(sql, params)`, `DB.get(sql, params
 - `mode=file` → the app's link is the `file:///…/index.html` in that file. Nothing runs in the background.
 - No `lab-mode.txt` → `/kickoff` hasn't run: run it (or open `index.html` directly).
 
-**Never switch modes or ports after kickoff.** The browser keeps saved data per address, so a different address shows an empty app. If a switch is truly unavoidable, Export first, then Import at the new address.
+**Never switch modes or ports after kickoff on your own.** Only a trainer can, with `/launch-filebased` or `/launch-serverbased`. The browser keeps saved data per address, so a different address shows an empty app. If a switch is truly unavoidable, Export first, then Import at the new address.
 
 The app code is identical in both modes, so build exactly the same way, and always give the participant the link from `lab-mode.txt`.
 
