@@ -1,4 +1,4 @@
-# LIGHT lab readiness check — Windows. Needs nothing installed (built-in Windows PowerShell 5.1).
+# LIGHT lab readiness check - Windows. Needs nothing installed (built-in Windows PowerShell 5.1).
 # Usage, from the project folder:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File .agents\skills\diagnose\scripts\diagnose.ps1
 # Optional: -Open edge|chrome   opens index.html in that browser at the end.

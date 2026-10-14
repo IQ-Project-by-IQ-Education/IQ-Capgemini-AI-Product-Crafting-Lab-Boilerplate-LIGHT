@@ -1,4 +1,4 @@
-# Optional local server for the LIGHT app — Windows built-in PowerShell only (no Node, no install).
+# Optional local server for the LIGHT app - Windows built-in PowerShell only (no Node, no install).
 # Serves the project folder on http://localhost:<port>/ to THIS computer only (loopback).
 # No admin rights needed. Close the window (or Ctrl+C) to stop it.
 #
