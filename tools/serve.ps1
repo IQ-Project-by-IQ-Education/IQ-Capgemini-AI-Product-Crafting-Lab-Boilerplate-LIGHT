@@ -1,11 +1,7 @@
-# Optional local server for the LIGHT app - Windows built-in PowerShell only (no Node, no install).
+# Optional local server for the LIGHT app - Windows built-in PowerShell only (no install).
 # Serves the project folder on http://localhost:<port>/ to THIS computer only (loopback).
-# No admin rights needed. Close the window (or Ctrl+C) to stop it.
-#
-#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\serve.ps1 [-Port 8080] [-NoOpen]
-#
-# Without -Port it reuses the port saved in lab-mode.txt (written by /kickoff), else 8080.
-# The port must stay the same from day to day: the browser keeps the app's data per address.
+#   powershell -NoProfile -ExecutionPolicy Bypass -File tools\serve.ps1 -Port 8080 -NoOpen
+# Normally started by tools\launch.ps1 (or start-app.cmd), not by hand.
 param([int]$Port = 0, [switch]$NoOpen)
 
 $ErrorActionPreference = "Stop"

@@ -5,10 +5,11 @@ double-clicking `index.html`** in Edge or Chrome. Every agent (Codex, Claude Cod
 must respect these rules for the whole lab, even if a "better" option seems obvious.
 
 **Never**
-- Never run or suggest `npm`, `npx`, `node`, `pip`, `python`, `yarn`, `pnpm`, or any install.
-- Never start a server (`http-server`, `npx serve`, `python -m http.server`, Live Server…). The **only**
-  exception is the built-in `tools/serve.ps1` (Windows PowerShell, no install), and only as decided by
-  `/kickoff` (see "How the app is opened" in `AGENTS.md`).
+- Never install anything or use a package manager (`npm install`, `npx`, `pip install`, `yarn`, `pnpm`…).
+- Never start a server any other way (`http-server`, `npx serve`, `npm run dev`, `python -m http.server`,
+  Live Server…). The **only** servers are the lab's own `tools/serve.*` (PowerShell, Perl, Node or Python,
+  built-in parts only), started by the launcher `tools/launch.ps1` / `tools/launch.sh` as decided by
+  `/kickoff` or a trainer (see "How the app is opened" in `AGENTS.md`).
 - Never add a framework or build step (React, Vue, Next, Vite, Tailwind, TypeScript, JSX…).
 - Never use `type="module"`, `import`/`export`, or `fetch()` of local files — they fail on `file://`.
 - Never create a second HTML page. New screens are hash routes (`#/thing`) in `js/app.js`.

@@ -1,6 +1,6 @@
 @echo off
-rem Optional: runs the app on http://localhost (Windows built-in tools only, nothing to install).
-rem Double-click this file, keep the window open while you work. Double-clicking index.html also works.
+rem Starts the app on this computer (Windows built-in tools only, nothing to install).
+rem Reuses the way /kickoff chose (localhost or file). Double-clicking index.html also works in file mode.
 cd /d "%~dp0"
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\serve.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\launch.ps1" restart -Open
 if errorlevel 1 pause

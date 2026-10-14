@@ -5,6 +5,7 @@ description: >
   or asks to force the app to run straight from the file (file:///.../index.html)
   instead of localhost. Overrides the mode /kickoff chose: stops the local
   server, switches lab-mode.txt to file mode and opens the app from the file.
+  Works on Mac and Windows.
 disable-model-invocation: true
 ---
 
@@ -19,4 +20,4 @@ These instructions are shared with Codex. When they say "Codex", read it as you 
 - Codex terminal tool → your Bash tool (on Windows, call `powershell.exe -NoProfile -Command "..."` through it when PowerShell is required).
 - "Approve for me" / default shell access on Codex → Claude Code's permission mode. Report whether commands ran without a permission prompt or whether each one needed approval.
 - Codex in-app browser → any browser tool you have (for example Claude in Chrome or Playwright) opened on the app's link from `lab-mode.txt` (or `file:///.../index.html` before `/kickoff`); if none is available, open the page with `Start-Process` / `open` and ask the user what they see.
-- Never use npm, node, python or any other local server to run or check the app. The only server allowed is the built-in `tools/serve.ps1`.
+- Never install anything or start a server yourself to run or check the app. Servers are started only through the launcher in `tools/` (`launch.ps1` / `launch.sh`).

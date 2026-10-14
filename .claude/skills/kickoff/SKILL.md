@@ -4,9 +4,9 @@ description: >
   Use this skill when the user types "/kickoff", "$kickoff", "kick off",
   "start the challenge", "start the app", or asks to launch the Capgemini AI
   Product Crafting Lab LIGHT starter. Names the app, decides once whether the
-  app runs on localhost (built-in Windows server, optional) or straight from
-  the file, opens it and confirms the "Build anything here" start screen.
-  Nothing is installed.
+  app runs on localhost (tries PowerShell / Perl, Node, Python servers with
+  short timeouts) or straight from the file, opens it and confirms the
+  "Build anything here" start screen. Nothing is installed. Mac and Windows.
 ---
 
 <!-- Claude Code entry point. The real instructions are shared with Codex and live in
@@ -20,4 +20,4 @@ These instructions are shared with Codex. When they say "Codex", read it as you 
 - Codex terminal tool → your Bash tool (on Windows, call `powershell.exe -NoProfile -Command "..."` through it when PowerShell is required).
 - "Approve for me" / default shell access on Codex → Claude Code's permission mode. Report whether commands ran without a permission prompt or whether each one needed approval.
 - Codex in-app browser → any browser tool you have (for example Claude in Chrome or Playwright) opened on the app's link from `lab-mode.txt` (or `file:///.../index.html` before `/kickoff`); if none is available, open the page with `Start-Process` / `open` and ask the user what they see.
-- Never use npm, node, python or any other local server to run or check the app. The only server allowed is the built-in `tools/serve.ps1`.
+- Never install anything or start a server yourself to run or check the app. Servers are started only through the launcher in `tools/` (`launch.ps1` / `launch.sh`).
