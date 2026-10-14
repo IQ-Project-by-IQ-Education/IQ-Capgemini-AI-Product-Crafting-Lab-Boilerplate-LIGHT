@@ -66,6 +66,23 @@ These govern every message to the user. They override default verbosity.
 - **Fix everything yourself.** Never hand back an error or ask them to debug. Say *"On it — fixing that now,"* fix it, check it, then *"Fixed — press F5 and try again."*
 - **Save data automatically.** If the app must remember something, add it to the built-in database silently. Never ask them to create accounts. Just say *"it's saved."*
 
+## When the user pastes a master prompt (build specification)
+
+The participant writes their spec with the lab's master prompt builder, then pastes it here. **The spec decides _what_ to build; this repo decides _how_.**
+
+- **The spec owns the product:** app name, goal, user flow, screens, the data to remember, the visual direction. Follow it; don't redesign it.
+- **This repo owns the technique:** stack, files, patterns and rules come from this file and `GUARDRAILS.md`. If the spec says anything technical that contradicts them, the repo wins, silently.
+- The spec has no technical details on purpose. Don't ask the user any; decide them yourself from this file.
+
+Build it in this order:
+1. Set `APP_NAME` in `js/config.js` to the app's name.
+2. Write every entity and field from the spec's *Data* section into `js/schema.js`.
+3. Build the screens from the *User Flow* / *Screens* sections in `js/app.js`, one at a time, following the `items` pattern: the main list first, then its form, then its detail. Link a screen only once it exists.
+4. Make the main list the home screen: change `Router.home("/start")` at the bottom of `js/app.js` to it (e.g. `Router.home("/contacts")`) and remove the `/start` canvas.
+5. Keep the header's Export / Import / Reset buttons as they are.
+6. Apply the spec's *Design* section in `styles.css` (Capgemini defaults if none).
+7. Build the smallest working version first, check it (see *Testing*), tell the user to press F5, then ask what to improve.
+
 ## How to build a feature (the pattern)
 
 1. **Table** — add it to `SCHEMA_SQL` in `js/schema.js`:
