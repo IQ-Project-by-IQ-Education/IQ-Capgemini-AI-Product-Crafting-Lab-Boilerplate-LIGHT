@@ -1,13 +1,13 @@
 ---
-name: launch-filebased
+name: force-filebased
 description: >
-  TRAINER ONLY. Use when a trainer types "/launch-filebased", "$launch-filebased",
+  TRAINER ONLY. Use when a trainer types "/force-filebased", "$force-filebased",
   or asks to force the app to run straight from the file (file:///.../index.html)
   instead of localhost. Overrides the mode /kickoff chose: stops the local
   server, switches lab-mode.txt to file mode and opens the app from the file.
 ---
 
-# Launch file-based (trainer override)
+# Force file-based (trainer override)
 
 A trainer runs this when the localhost mode chosen by `/kickoff` is causing problems (server window keeps closing, port conflicts, security software complaining…). It forces **file mode** for the rest of the lab. It overrides `/kickoff`'s decision and the "never switch modes" rule, because a trainer asked for it.
 

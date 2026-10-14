@@ -19,7 +19,7 @@ Every skill ends with the same **Lab guardrails** block (no npm/node/python, no 
 | `/capgemini-ui-design` | Agent | Capgemini colors, type, components, logo. Output goes to `styles.css` and the `render()` templates in `js/app.js`. | Google Fonts optional with system-font fallback, no `next/image`, logo at `assets/capgemini-logo.png` (relative path). |
 | `/capture-bug` | Participant | Collects the bug context step by step (in French), then fixes it. | Browser console only (no terminal), "Loading…" / "site storage is disabled" cases, F5 to see changes, fixes only in `js/app.js` / `js/schema.js` / `styles.css`. |
 | `/iq-project-slides` | Participant | Opens the lab slides. | Unchanged (guardrail added). |
-| `/launch-filebased` | **Trainer only** | Overrides `/kickoff`: stops the local server, switches `lab-mode.txt` to file mode, opens `index.html` from the folder. Offers Export → Import so no data is lost. | New. Never runs on its own. |
-| `/launch-serverbased` | **Trainer only** | Overrides `/kickoff` (Windows): starts `tools/serve.ps1`, switches `lab-mode.txt` to localhost mode, opens `http://localhost:<port>/`. Offers Export → Import. If it fails, reports the exact error and leaves the previous mode. | New. Never runs on its own. |
+| `/force-filebased` | **Trainer only** | Overrides `/kickoff`: stops the local server, switches `lab-mode.txt` to file mode, opens `index.html` from the folder. Offers Export → Import so no data is lost. | New. Never runs on its own. |
+| `/force-serverbased` | **Trainer only** | Overrides `/kickoff` (Windows): starts `tools/serve.ps1`, switches `lab-mode.txt` to localhost mode, opens `http://localhost:<port>/`. Offers Export → Import. If it fails, reports the exact error and leaves the previous mode. | New. Never runs on its own. |
 
 Removed: `scripts/npm-install-test.sh` and `scripts/npm-install-test.ps1` (their only purpose was testing npm installs).

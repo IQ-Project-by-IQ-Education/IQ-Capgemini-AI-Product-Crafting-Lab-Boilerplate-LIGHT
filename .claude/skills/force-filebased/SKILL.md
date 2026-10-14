@@ -1,7 +1,7 @@
 ---
-name: launch-filebased
+name: force-filebased
 description: >
-  TRAINER ONLY. Use when a trainer types "/launch-filebased", "$launch-filebased",
+  TRAINER ONLY. Use when a trainer types "/force-filebased", "$force-filebased",
   or asks to force the app to run straight from the file (file:///.../index.html)
   instead of localhost. Overrides the mode /kickoff chose: stops the local
   server, switches lab-mode.txt to file mode and opens the app from the file.
@@ -9,10 +9,10 @@ disable-model-invocation: true
 ---
 
 <!-- Claude Code entry point. The real instructions are shared with Codex and live in
-     .agents/skills/launch-filebased/ — edit them there, not here. If you change the skill's name
+     .agents/skills/force-filebased/ — edit them there, not here. If you change the skill's name
      or description there, copy it into this file's header too. -->
 
-Read `.agents/skills/launch-filebased/SKILL.md` (from the project root) and follow it exactly, as if its content were written here. Any scripts or files it mentions are in `.agents/skills/launch-filebased/`. Also follow `GUARDRAILS.md` at the project root at all times.
+Read `.agents/skills/force-filebased/SKILL.md` (from the project root) and follow it exactly, as if its content were written here. Any scripts or files it mentions are in `.agents/skills/force-filebased/`. Also follow `GUARDRAILS.md` at the project root at all times.
 
 These instructions are shared with Codex. When they say "Codex", read it as you (Claude Code):
 - Codex file tools → your Read / Edit / Write tools.

@@ -1,13 +1,13 @@
 ---
-name: launch-serverbased
+name: force-serverbased
 description: >
-  TRAINER ONLY. Use when a trainer types "/launch-serverbased", "$launch-serverbased",
+  TRAINER ONLY. Use when a trainer types "/force-serverbased", "$force-serverbased",
   or asks to force the app to run on localhost with the built-in Windows server
   (tools/serve.ps1) instead of from the file. Overrides the mode /kickoff chose:
   starts the server, switches lab-mode.txt to localhost mode and opens the app.
 ---
 
-# Launch server-based (trainer override)
+# Force server-based (trainer override)
 
 A trainer runs this when file mode is causing problems (the browser blocks saved data or features for `file://` pages) and they want the app on `http://localhost` through the built-in Windows server `tools/serve.ps1` (no Node, no install, no admin rights, this computer only). It overrides `/kickoff`'s decision and the "never switch modes" rule, because a trainer asked for it.
 
@@ -31,7 +31,7 @@ Workflow:
 8. **Restore the data** if it was exported in step 2: ask the trainer to click **Import** at the new link and pick the exported `.sqlite` file.
 9. **Report** in two lines: `Mode: localhost` + the new link to bookmark. Remind them: the minimized "Lab app" window must stay open; after a restart, double-click `start-app.cmd`.
 
-**If it fails** (script refused by policy, no port free, no answer in 15 s): don't loop and don't fall back silently. Leave `lab-mode.txt` as it was, stop any server you started, and tell the trainer exactly what failed (the error text) and that the app stays in its previous mode. Suggest `/launch-filebased` if the previous mode was also broken.
+**If it fails** (script refused by policy, no port free, no answer in 15 s): don't loop and don't fall back silently. Leave `lab-mode.txt` as it was, stop any server you started, and tell the trainer exactly what failed (the error text) and that the app stays in its previous mode. Suggest `/force-filebased` if the previous mode was also broken.
 
 ## Lab guardrails (always on — shared by every skill)
 

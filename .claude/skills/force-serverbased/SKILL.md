@@ -1,7 +1,7 @@
 ---
-name: launch-serverbased
+name: force-serverbased
 description: >
-  TRAINER ONLY. Use when a trainer types "/launch-serverbased", "$launch-serverbased",
+  TRAINER ONLY. Use when a trainer types "/force-serverbased", "$force-serverbased",
   or asks to force the app to run on localhost with the built-in Windows server
   (tools/serve.ps1) instead of from the file. Overrides the mode /kickoff chose:
   starts the server, switches lab-mode.txt to localhost mode and opens the app.
@@ -9,10 +9,10 @@ disable-model-invocation: true
 ---
 
 <!-- Claude Code entry point. The real instructions are shared with Codex and live in
-     .agents/skills/launch-serverbased/ — edit them there, not here. If you change the skill's name
+     .agents/skills/force-serverbased/ — edit them there, not here. If you change the skill's name
      or description there, copy it into this file's header too. -->
 
-Read `.agents/skills/launch-serverbased/SKILL.md` (from the project root) and follow it exactly, as if its content were written here. Any scripts or files it mentions are in `.agents/skills/launch-serverbased/`. Also follow `GUARDRAILS.md` at the project root at all times.
+Read `.agents/skills/force-serverbased/SKILL.md` (from the project root) and follow it exactly, as if its content were written here. Any scripts or files it mentions are in `.agents/skills/force-serverbased/`. Also follow `GUARDRAILS.md` at the project root at all times.
 
 These instructions are shared with Codex. When they say "Codex", read it as you (Claude Code):
 - Codex file tools → your Read / Edit / Write tools.

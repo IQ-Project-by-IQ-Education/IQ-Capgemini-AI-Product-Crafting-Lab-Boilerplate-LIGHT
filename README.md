@@ -82,8 +82,8 @@ Type these in the assistant (Codex: `$name` or `/name` · Claude Code: `/name`):
 | **`/capgemini-ui-design`** | Keeps the app in the Capgemini look. |
 | **`/capture-bug`** | Helps describe a problem so the assistant can fix it. |
 | **`/iq-project-slides`** | Opens the lab slides. |
-| **`/launch-filebased`** | *Trainers only.* Forces the app to open from the file. |
-| **`/launch-serverbased`** | *Trainers only.* Forces the app onto localhost (Windows). |
+| **`/force-filebased`** | *Trainers only.* Forces the app to open from the file. |
+| **`/force-serverbased`** | *Trainers only.* Forces the app onto localhost (Windows). |
 
 Details for helpers: [`SKILLS.md`](SKILLS.md).
 

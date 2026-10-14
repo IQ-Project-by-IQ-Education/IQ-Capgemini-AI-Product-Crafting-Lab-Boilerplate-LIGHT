@@ -1,8 +1,8 @@
 interface:
-  display_name: "Launch server-based (trainer)"
+  display_name: "Force server-based (trainer)"
   short_description: "Force the app onto localhost"
   brand_color: "#0070AD"
-  default_prompt: "Use $launch-serverbased to switch this app to localhost mode."
+  default_prompt: "Use $force-serverbased to switch this app to localhost mode."
 
 policy:
   allow_implicit_invocation: false
