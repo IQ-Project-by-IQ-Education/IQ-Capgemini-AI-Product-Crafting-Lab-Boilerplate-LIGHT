@@ -24,9 +24,10 @@ js/config.js        APP_NAME (also namespaces the browser-stored database)
 js/schema.js        SCHEMA_SQL — CREATE TABLE IF NOT EXISTS for every table; SCHEMA_UPGRADES for new columns
 js/db.js            SQLite via sql.js, saved to IndexedDB → localStorage → memory only (Export to keep), after every write
 js/router.js        hash router + helpers: Router.on / Router.go / render / esc / toast
-js/app.js           the screens (ships with an "items" list → form → detail example to copy)
+js/app.js           the screens: a "/start" blank canvas (logos + "Build anything here", the first screen)
+                    and an "items" list → form → detail example to copy
+assets/             the Capgemini logo (header + wide version) and the IQ Project logo
 vendor/sql-asm.js   SQLite compiled to plain JS (asm.js, not wasm — wasm can't load from file://). Never edit.
-assets/             the Capgemini logo
 ```
 
 ## Git rule
@@ -85,7 +86,7 @@ These govern every message to the user. They override default verbosity.
    });
    ```
 3. **Writes** — `DB.run("INSERT INTO contacts (name, company) VALUES (?, ?)", [name, company])` returns `{ id, changes }` and saves automatically. Then `toast("Saved")` and `Router.go(...)`.
-4. **Navigation** — add a link in the page (`<a href="#/contacts">Contacts</a>`). To make it the first screen, change `Router.home("/items")` at the bottom of `js/app.js` (and you may remove the items example once the real screens exist).
+4. **Navigation** — add a link in the page (`<a href="#/contacts">Contacts</a>`). The app opens on the `/start` blank canvas. Once the participant's app has a real first screen, change `Router.home("/start")` at the bottom of `js/app.js` and the header logo link in `index.html` to it (you may then remove the start canvas and the items example).
 5. **Events** — attach listeners right after `render(...)` with `document.getElementById(...)`. No inline frameworks.
 
 API reference: `DB.run(sql, params)`, `DB.all(sql, params)`, `DB.get(sql, params)`, `DB.exportFile()`, `DB.importFile(file)`, `DB.reset()`; `Router.on(pattern, fn(params))`, `Router.go(path)`, `Router.home(path)`, `render(html)`, `esc(text)`, `toast(message)`.

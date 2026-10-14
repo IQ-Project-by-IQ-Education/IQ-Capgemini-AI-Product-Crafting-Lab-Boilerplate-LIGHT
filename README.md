@@ -37,7 +37,7 @@ This version is made for **locked-down Capgemini laptops**: no Node, no npm, no 
 
 1. **Unzip** the folder to your computer (right-click the zip → **Extract All**). Pick a normal folder like `C:\Lab` or Documents — **not** inside the zip, and preferably not OneDrive.
 2. **Double-click `index.html`.** It opens in Edge or Chrome.
-3. You see the **Items** screen — that's your app, ready to grow.
+3. You see a blank page with the Capgemini and IQ Project logos saying **Build anything here**: that's your app, ready to grow.
 4. **Bookmark it** (Ctrl+D). The `file:///…/index.html` address is your app's link.
 
 Then tell the assistant what you'd like to build, for example:

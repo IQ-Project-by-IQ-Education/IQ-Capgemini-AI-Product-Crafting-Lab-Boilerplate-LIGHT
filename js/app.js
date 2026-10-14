@@ -1,6 +1,21 @@
 // The app's screens. The "items" example below (list -> form -> detail) is the
 // pattern to copy for every new thing the app keeps track of.
 
+// ---------- Start: the blank canvas the participant sees first ----------
+// Replace it with the app's real first screen once there is one.
+Router.on("/start", function () {
+  render(`
+    <section class="canvas">
+      <div class="canvas-logos">
+        <img src="assets/capgemini-logo-wide.png" alt="Capgemini">
+        <span class="canvas-x" aria-hidden="true">×</span>
+        <img src="assets/iq-project-logo.png" alt="IQ Project">
+      </div>
+      <h1>Build anything here</h1>
+    </section>
+  `);
+});
+
 // ---------- Items: list ----------
 Router.on("/items", function () {
   var items = DB.all("SELECT * FROM items ORDER BY id DESC");
@@ -104,7 +119,7 @@ document.getElementById("import-file").addEventListener("change", function (e) {
   if (!confirm("Replace all current data with " + file.name + "?")) return;
   DB.importFile(file).then(function () {
     toast("Imported");
-    Router.go("/items");
+    Router.go("/start");
   }).catch(function () {
     toast("That file is not a database export");
   });
@@ -114,7 +129,7 @@ document.getElementById("btn-reset").addEventListener("click", function () {
   if (!confirm("Delete ALL data in this app? Export first if you want a copy.")) return;
   DB.reset().then(function () {
     toast("Everything was deleted");
-    Router.go("/items");
+    Router.go("/start");
   });
 });
 
@@ -128,7 +143,7 @@ DB.init().then(function () {
       `<p class="notice">This browser won't let the app keep your data after you close it.
       Everything works, but press <strong>Export</strong> before closing, then <strong>Import</strong> next time.</p>`);
   }
-  Router.home("/items");
+  Router.home("/start");
   Router.start();
 }).catch(function (e) {
   console.error(e);

@@ -80,6 +80,20 @@ a:hover { color: var(--cap-vibrant); }
   box-shadow: var(--shadow);
 }
 
+/* ---------- Start screen (blank canvas) ---------- */
+.canvas {
+  min-height: calc(100vh - 220px);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 40px;
+  text-align: center;
+}
+.canvas-logos { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 28px; }
+.canvas-logos img { height: 56px; width: auto; max-width: 100%; }
+.canvas-x { font-size: 28px; color: var(--cap-gray); }
+.canvas h1 { font-size: clamp(32px, 6vw, 60px); margin: 0; }
+
 .loading, .empty { color: var(--cap-gray); }
 .notice {
   box-sizing: border-box;

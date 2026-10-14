@@ -43,16 +43,16 @@ It checks, and prints one `PASS` / `WARN` / `FAIL` line each:
 - macOS: `ls /Applications | grep -i -E "edge|chrome"`, `pwd`, `ls index.html js vendor`, `wc -c vendor/sql-asm.js`, then `open index.html`.
 - If even single commands are blocked, ask the helper to check by eye: the folder is unzipped (not opened inside the zip), and `vendor\sql-asm.js` is about 1.3 MB in File Explorer.
 
-## Step 2 — Confirm the page reaches the Items screen
+## Step 2 — Confirm the page reaches the start screen
 
 This proves the browser runs the app **and** allows it to save data.
 
 - If you have a browser tool (Codex in-app browser, Claude in Chrome, Playwright…), open the app link the script printed (`file:///.../index.html`), wait up to 10 seconds and read the page.
-- Otherwise ask the helper one question: *"Look at the browser window that just opened. Does it show a page titled **Items** with a **New item** button, or does it stay on **Loading…**?"*
+- Otherwise ask the helper one question: *"Look at the browser window that just opened. Does it show the Capgemini and IQ Project logos with **Build anything here**, or does it stay on **Loading…**?"*
 
 Result:
-- Shows **Items** → `PASS`. If time allows, also click **New item**, save one, press F5, and confirm it is still there; then delete it.
-- Shows **Items** with a red note **"This browser won't let the app keep your data"** → `WARN`: site storage (IndexedDB and localStorage) is disabled by policy for local files. The app works, but only in memory: data must be exported before closing. Try the other browser (Edge ↔ Chrome) and report both results.
+- Shows **Build anything here** → `PASS`. If time allows, test saving: add `#/items` to the end of the address, click **New item**, save one, press F5, and confirm it is still there; then delete it.
+- Shows the start screen with a red note **"This browser won't let the app keep your data"** → `WARN`: site storage (IndexedDB and localStorage) is disabled by policy for local files. The app works, but only in memory: data must be exported before closing. Try the other browser (Edge ↔ Chrome) and report both results.
 - Stays on **Loading…** or shows **"The app could not start"** → `FAIL`: the app files are damaged or JavaScript is blocked. Check steps 3–4 and policies.
 - Blank page / the file opens as text / download prompt → `FAIL`: `.html` files or `file://` pages are blocked.
 
@@ -74,7 +74,7 @@ PASS/WARN/FAIL  Unzipped on a local disk ........ <path / OneDrive warning>
 PASS/WARN/FAIL  Boilerplate files present ....... <missing files if any>
 PASS/WARN/FAIL  vendor/sql-asm.js intact ........ <size, checksum>
 PASS/WARN/FAIL  Browser policies ................ <blocking policies found, if any>
-PASS/WARN/FAIL  App opens and shows Items ....... <browser used, what was seen>
+PASS/WARN/FAIL  App opens on the start screen .. <browser used, what was seen>
 PASS/WARN/FAIL  Data survives a reload (optional) <result or "not tested">
 
 Agent can read/edit project files: yes/no
