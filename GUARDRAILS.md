@@ -6,7 +6,9 @@ must respect these rules for the whole lab, even if a "better" option seems obvi
 
 **Never**
 - Never run or suggest `npm`, `npx`, `node`, `pip`, `python`, `yarn`, `pnpm`, or any install.
-- Never start a server (`localhost`, `http-server`, `python -m http.server`, Live Server…).
+- Never start a server (`http-server`, `npx serve`, `python -m http.server`, Live Server…). The **only**
+  exception is the built-in `tools/serve.ps1` (Windows PowerShell, no install), and only as decided by
+  `/kickoff` (see "How the app is opened" in `AGENTS.md`).
 - Never add a framework or build step (React, Vue, Next, Vite, Tailwind, TypeScript, JSX…).
 - Never use `type="module"`, `import`/`export`, or `fetch()` of local files — they fail on `file://`.
 - Never create a second HTML page. New screens are hash routes (`#/thing`) in `js/app.js`.

@@ -8,11 +8,11 @@ This file is read by **Codex** (`AGENTS.md`) and **Claude Code** (through `CLAUD
 
 **Who you're working with.** Every user is a **Capgemini employee on a locked-down corporate laptop**. Assume IT blocks things by default: installs, terminals, scripts, admin rights, some browser features, sometimes even site storage or downloads. Something being blocked is normal, not a failure — your job is to route around it and keep them building.
 
-**Stack: zero install, browser only.** The app is a single web page that runs by double-clicking `index.html` in Edge or Chrome. No server, no Node, no npm, no Python, no terminal. Data is real SQLite (sql.js) kept inside the browser. Outside services (AI APIs, online libraries) are allowed **when they work** (see *Outside services*).
+**Stack: zero install, browser only.** The app is a single web page that runs by double-clicking `index.html` in Edge or Chrome, or, when `/kickoff` found it works on this laptop, on `http://localhost` through the built-in Windows server `tools/serve.ps1`. No Node, no npm, no Python, no install. Data is real SQLite (sql.js) kept inside the browser. Outside services (AI APIs, online libraries) are allowed **when they work** (see *Outside services*).
 
 ## Hard constraints (read first)
 
-Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server, never a framework or build step, never `type="module"` or `fetch()` of local files, never a second HTML page. Outside services only if they work; **hard rule: if one doesn't work within 5 minutes, remove it and stick to the base boilerplate.** Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
+Follow **`GUARDRAILS.md`** at all times. In short: never npm/npx/node/pip/python, never a server other than `tools/serve.ps1`, never a framework or build step, never `type="module"` or `fetch()` of local files, never a second HTML page. Outside services only if they work; **hard rule: if one doesn't work within 5 minutes, remove it and stick to the base boilerplate.** Everything goes in `js/app.js` + `js/schema.js` (+ `styles.css`), following the `items` example.
 
 ## Files
 
@@ -108,12 +108,24 @@ Build it in this order:
 
 API reference: `DB.run(sql, params)`, `DB.all(sql, params)`, `DB.get(sql, params)`, `DB.exportFile()`, `DB.importFile(file)`, `DB.reset()`; `Router.on(pattern, fn(params))`, `Router.go(path)`, `Router.home(path)`, `render(html)`, `esc(text)`, `toast(message)`.
 
+## How the app is opened (decided once by `/kickoff`)
+
+`/kickoff` tries the built-in local server and saves the result in `lab-mode.txt` (machine-local, never committed):
+
+- `mode=localhost` → the app's link is the `url` in that file (e.g. `http://localhost:8080/`). `tools/serve.ps1` runs in a minimized window. If the link stops answering (window closed, computer restarted), restart it yourself with the same port: `Start-Process powershell -WindowStyle Minimized -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File',"$PWD\tools\serve.ps1",'-NoOpen'` (it reads the port from `lab-mode.txt`). The participant can also double-click `start-app.cmd`.
+- `mode=file` → the app's link is the `file:///…/index.html` in that file. Nothing runs in the background.
+- No `lab-mode.txt` → `/kickoff` hasn't run: run it (or open `index.html` directly).
+
+**Never switch modes or ports after kickoff.** The browser keeps saved data per address, so a different address shows an empty app. If a switch is truly unavoidable, Export first, then Import at the new address.
+
+The app code is identical in both modes, so build exactly the same way, and always give the participant the link from `lab-mode.txt`.
+
 ## Testing / verifying changes
 
 There is nothing to build or start. To check a change:
 
 - Re-read the files you changed for syntax slips (a missing backtick or bracket blanks the whole page).
-- If you have a browser tool (Codex in-app browser, Claude in Chrome, Playwright…), open `file:///<project folder>/index.html`, press reload, exercise the new screen (add / edit / delete), and check the console for red errors.
+- If you have a browser tool (Codex in-app browser, Claude in Chrome, Playwright…), open the app's link from `lab-mode.txt`, press reload, exercise the new screen (add / edit / delete), and check the console for red errors.
 - If you have no browser tool, open the page for the user (`Start-Process .\index.html` on Windows, `open index.html` on macOS) and tell them to press F5 on that tab.
 - Only then report success, in plain words.
 
@@ -125,7 +137,7 @@ The lab lasts 2 hours. **Never sink time into one problem.**
 - **There is no fixed recipe.** Use your judgment: whatever is simplest and actually works on this laptop is the right answer. The examples below are ideas, not steps to follow in order.
 - **Keep it invisible to the user.** Solving blocks is your job, not theirs. Don't explain what failed, don't hand them steps, don't ask them to change settings. They should only see their app keep working. Involve them only if there is truly no other way (e.g. pressing F5, or saying what they see on screen).
 - **A working simpler version beats a stuck perfect one.** If a part is too hard, build a plain version that does the job and mention it in one sentence.
-- **Stay inside `GUARDRAILS.md`.** No installs, no server, no `localhost`: those are exactly what Capgemini laptops block, so they are never the way out. An outside service is allowed **only if it works**; if it doesn't within 5 minutes, remove it and stick to the base boilerplate (hard rule, see *Outside services*).
+- **Stay inside `GUARDRAILS.md`.** No installs, no other server than `tools/serve.ps1`: those are exactly what Capgemini laptops block, so they are never the way out. An outside service is allowed **only if it works**; if it doesn't within 5 minutes, remove it and stick to the base boilerplate (hard rule, see *Outside services*).
 
 Ideas that often work:
 - **Saving is blocked** → `js/db.js` already handles it by itself (browser storage, then a simpler storage, then memory only with a red note asking to Export before closing, the only case where the user must act). Don't spend time on it; keep building.

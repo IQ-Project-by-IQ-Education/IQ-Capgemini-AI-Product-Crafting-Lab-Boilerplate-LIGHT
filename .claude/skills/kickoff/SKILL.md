@@ -3,9 +3,10 @@ name: kickoff
 description: >
   Use this skill when the user types "/kickoff", "$kickoff", "kick off",
   "start the challenge", "start the app", or asks to launch the Capgemini AI
-  Product Crafting Lab LIGHT starter. Names the app, opens index.html in the
-  browser and confirms it shows the "Build anything here" start screen.
-  Nothing is installed or started.
+  Product Crafting Lab LIGHT starter. Names the app, decides once whether the
+  app runs on localhost (built-in Windows server, optional) or straight from
+  the file, opens it and confirms the "Build anything here" start screen.
+  Nothing is installed.
 ---
 
 <!-- Claude Code entry point. The real instructions are shared with Codex and live in

@@ -40,6 +40,8 @@ This version is made for **locked-down Capgemini laptops**: no Node, no npm, no 
 3. You see a blank page with the Capgemini and IQ Project logos saying **Build anything here**: that's your app, ready to grow.
 4. **Bookmark it** (Ctrl+D). The `file:///…/index.html` address is your app's link.
 
+**Optional, Windows:** `/kickoff` also tries to run the app on `http://localhost` using a small built-in Windows server (nothing to install). If it works on your laptop, that becomes your app's link and a minimized window keeps it running; after a restart, double-click **`start-app.cmd`**. If it doesn't work, the app simply opens from the file as above.
+
 Then tell the assistant what you'd like to build, for example:
 
 > *"Build me a mini CRM to keep track of my contacts."*
@@ -109,6 +111,8 @@ Details for helpers: [`SKILLS.md`](SKILLS.md).
 ```
 .
 ├── index.html          # The app — double-click to open
+├── start-app.cmd       # Optional (Windows): run the app on http://localhost
+├── tools/serve.ps1     # The built-in local server behind start-app.cmd
 ├── styles.css          # Capgemini look
 ├── js/
 │   ├── config.js       # The app's name

@@ -34,9 +34,9 @@ Workflow:
 
 ## Lab guardrails (always on — shared by every skill)
 
-This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm, Python or server. Whatever this skill asks, **never**:
+This lab runs on locked-down laptops: the app is one page opened from the folder (`index.html` in Edge/Chrome), with no Node, npm or Python (optionally served on localhost by the built-in `tools/serve.ps1`, decided once by `/kickoff`). Whatever this skill asks, **never**:
 - run `npm`, `npx`, `node`, `pip`, `python` or install anything;
-- start a server or use `localhost`;
+- start any server other than the built-in `tools/serve.ps1` (no Node, Python or other local servers);
 - add a framework or build step;
 - use `type="module"`, `import`/`export`, or `fetch()` of local files;
 - create another HTML page.

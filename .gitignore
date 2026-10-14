@@ -2,3 +2,4 @@
 # Claude Code status line (machine-local)
 .claude/current-task
 *.zip
+lab-mode.txt
